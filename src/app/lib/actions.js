@@ -1,3 +1,5 @@
+import { revalidatePath } from "next/cache";
+
 const deleteUSer = async (userId) => {
 
     'use server';
@@ -5,10 +7,16 @@ const deleteUSer = async (userId) => {
     const res = await fetch(`http://localhost:5000/user/${userId}`, {
         method: 'DELETE',
     });
-    const dada = await res.json();
+    const data = await res.json();
 
+    console.log("Deleted user data:", data);
 
-    return dada;
+    if (data.deletedCount>0){
+        revalidatePath('/user');
+    }
+    
+
+    return data;
     
 }
 
