@@ -1,4 +1,7 @@
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
+
+
 
 const deleteUSer = async (userId) => {
 
@@ -67,6 +70,7 @@ export const updateUser = async (userId, formData) => {
 
     if (data.modifiedCount > 0) {
         revalidatePath('/user');
+        redirect(`/user`);
     }
 
     return data;

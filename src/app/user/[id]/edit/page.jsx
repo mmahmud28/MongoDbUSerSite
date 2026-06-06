@@ -8,9 +8,13 @@ const EditPage = async ({ params }) => {
     const { id } = await params;
     const user_data = await getUserById(id);
 
-    const updateUserRapper =  (formData) => {
+    const updateUserRapper = async  (formData) => {
+        'use server';
 
-        return updateUser(id, formData);
+        console.log(formData);
+        return updateUser(id, formData);        
+        
+        
     }
 
     return (
